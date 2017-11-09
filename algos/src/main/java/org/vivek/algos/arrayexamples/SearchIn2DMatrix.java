@@ -22,7 +22,7 @@ public class SearchIn2DMatrix {
 		System.out.println("totalRows ="+totalRows  );//5
 		System.out.println(" totalCols ="+ totalCols );//4
 
-		int[] rowArr = new int[totalRows-1];
+		int[] rowArr = new int[totalCols];
 
 		for (int i = 0; i < totalRows; i++) {
 			for (int j = 0; j <totalCols; j++) {

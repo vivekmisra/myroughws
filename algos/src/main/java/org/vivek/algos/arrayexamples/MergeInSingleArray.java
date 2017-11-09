@@ -65,5 +65,7 @@ public class MergeInSingleArray {
 			array1[i] = array1[i - 1] + (int) (Math.random() * 5);
 		}
 	}
+	
+	
 
 }

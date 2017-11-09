@@ -38,7 +38,7 @@ public class NextLargerNumber {
 			System.out.println("Not a valid number");
 			return;
 		}*/
-		String input = "7124";
+		String input = "62593";
 		if (input.length() == 1) {
 			System.out.println("no greater number possible");
 			return;
@@ -57,13 +57,13 @@ public class NextLargerNumber {
 		int rightBiggerIndex = -1;
 		int leftSmallerIndex = -1;
 		System.out.println(" digits.size() ="+  digits.size() );
-		for (int rightDigit = digits.size() - 1; rightDigit > 0	&& rightBiggerIndex == -1; --rightDigit) {
-			System.out.println("rightDigit="+ rightDigit);
-			for (int leftDigit = rightDigit - 1; leftDigit >= 0; --leftDigit) {
-				System.out.println("leftDigit="+ leftDigit);
-				if (digits.get(rightDigit) > digits.get(leftDigit)) {
-					rightBiggerIndex = rightDigit;
-					leftSmallerIndex = leftDigit;
+		for (int rightDigitIndex = digits.size() - 1; rightDigitIndex > 0	&& rightBiggerIndex == -1; --rightDigitIndex) {
+			System.out.println("rightDigitIndex="+ rightDigitIndex);
+			for (int leftDigitIndex = rightDigitIndex - 1; leftDigitIndex >= 0; --leftDigitIndex) {
+				System.out.println("leftDigit="+ leftDigitIndex);
+				if (digits.get(rightDigitIndex) > digits.get(leftDigitIndex)) {
+					rightBiggerIndex = rightDigitIndex;
+					leftSmallerIndex = leftDigitIndex;
 					break;
 				}
 			}

@@ -2,6 +2,7 @@ package org.vivek.algos.arrayexamples;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MissigRangesInSortedArray {
@@ -12,13 +13,14 @@ public class MissigRangesInSortedArray {
 
 	public static void main(String[] args) {
 		int [] arr = new int[] {0, 1, 3, 50, 75};
-		 System.out.println(findMissingRanges( arr));
-		 
-		 System.out.println(findMissingRanges( arr,0,75));
+		 System.out.println(findMissingRanges1( arr));		 
+		 System.out.println(findMissingRanges2( arr,0,100));
+		 System.out.println(findMissingRanges3( arr,0,100));
+
 
 	}
 
-	static String findMissingRanges(int[] arr) {
+	static String findMissingRanges1(int[] arr) {
 		System.out.println("Array "+ Arrays.toString(arr) );
 		Range r = new Range();
 		StringBuffer sb = new StringBuffer();
@@ -38,7 +40,7 @@ public class MissigRangesInSortedArray {
 					  resetNextExpected(r);									
 				} else {					    
 						r.setHigher(arr[i]);
-					    sb.append(String.valueOf(r.getLower())).append("-").append(r.getHigher()-1).append(",");
+					    sb.append(String.valueOf(r.getLower())).append("->").append(r.getHigher()-1).append(",");
 					    System.out.println(sb.toString());
 					    resetNextExpected(r);
 				}
@@ -49,7 +51,7 @@ public class MissigRangesInSortedArray {
 			
 		}
 		if (arr.length < MAX_LIMIT){
-			 sb.append(String.valueOf(arr[arr.length-1]+1)).append("-").append(MAX_LIMIT);
+			 sb.append(String.valueOf(arr[arr.length-1]+1)).append("->").append(MAX_LIMIT);
 		}
 		return sb.toString();
 
@@ -60,7 +62,7 @@ public class MissigRangesInSortedArray {
 		r.clear();
 	}
 	
-	static List<String> findMissingRanges(int[] A, int lower, int upper) {
+	static List<String> findMissingRanges2(int[] A, int lower, int upper) {
 	        List<String> result = new ArrayList<String>();
 	        int pre = lower - 1;
 	        for(int i = 0 ; i <= A.length  ; i++){
@@ -78,10 +80,40 @@ public class MissigRangesInSortedArray {
 	            }
 	            pre = after;
 	        }
-	        System.out.println(Arrays.deepToString(result.toArray()));
+	        System.out.println("findMissingRanges2="+Arrays.deepToString(result.toArray()));
 	        return result;
 	    }
 	
+	 public static List<String> findMissingRanges3(int[] nums, int lower, int upper) {
+	        if (nums.length == 0) {
+	            return Collections.singletonList(makeRange(lower, upper));
+	        }
+	        List<String> result = new ArrayList<String>();
+	        if (lower < nums[0]) {
+	            result.add(makeRange(lower, nums[0] - 1));
+	        }
+	        for (int i = 0; i < nums.length - 1; i++) {
+	            if (nums[i] == nums[i + 1]) {
+	                continue;
+	            }
+	            if ((nums[i] + 1) != nums[i + 1]) {
+	                result.add(makeRange(nums[i] + 1, nums[i + 1] - 1));
+	            }
+	        }
+	        if (nums[nums.length - 1] < upper) {
+	            result.add(makeRange(nums[nums.length - 1] + 1, upper));
+	        }
+	        return result;
+	    }
+
+	    private static String makeRange(int a, int b) {
+	    	 System.out.println("findMissingRanges3=");
+	        if (a == b) {
+	            return String.valueOf(a);
+	        } else {
+	            return a + "->" + b;
+	        }
+	    }
 	
 	
 }
